@@ -171,8 +171,6 @@
 <p>Austria, Germany, Switzerland, or somewhere else in the EU?</p>
 </div><div aria-label="Study opportunities photos" class="media-carousel study-banner" data-carousel="" data-interval="5000">
 <div class="carousel-track"><figure class="carousel-slide is-active"><img alt="Austria university destination" loading="lazy" src="assets/study-austria.png"/><figcaption class="country-slide-label">Austria</figcaption></figure><figure class="carousel-slide"><img alt="Germany university destination" loading="lazy" src="assets/study-germany.png"/><figcaption class="country-slide-label">Germany</figcaption></figure><figure class="carousel-slide"><img alt="Switzerland university destination" loading="lazy" src="assets/study-switzerland.png"/><figcaption class="country-slide-label">Switzerland</figcaption></figure><figure class="carousel-slide"><img alt="Other European Union study destinations" loading="lazy" src="assets/study-eu.png"/><figcaption class="country-slide-label">European Union</figcaption></figure></div>
-<button aria-label="Previous image" class="carousel-control carousel-prev" type="button">‹</button>
-<button aria-label="Next image" class="carousel-control carousel-next" type="button">›</button>
 <div aria-label="Choose image" class="carousel-dots"></div>
 </div>
 <div aria-label="Study destination" class="destination-tabs" role="tablist">
@@ -253,8 +251,6 @@
 </div>
 <div class="work-image reveal"><div aria-label="Work and qualification opportunities" class="media-carousel section-media-carousel" data-carousel="" data-interval="5000">
 <div class="carousel-track"><figure class="carousel-slide is-active"><img alt="Construction and infrastructure team at a job site" loading="lazy" src="assets/work-01.jpg"/></figure><figure class="carousel-slide"><img alt="Electrical technician testing an installation" loading="lazy" src="assets/work-02.jpg"/></figure><figure class="carousel-slide"><img alt="Medical and laboratory professionals working together" loading="lazy" src="assets/work-04.jpg"/></figure><figure class="carousel-slide"><img alt="Healthcare professionals in a clinical setting" loading="lazy" src="assets/work-05.jpg"/></figure></div>
-<button aria-label="Previous image" class="carousel-control carousel-prev" type="button">‹</button>
-<button aria-label="Next image" class="carousel-control carousel-next" type="button">›</button>
 <div aria-label="Choose image" class="carousel-dots"></div>
 </div></div>
 </div>
@@ -263,8 +259,6 @@
 <div class="container image-feature">
 <div class="feature-image reveal"><div aria-label="Au pair and childcare photos" class="media-carousel section-media-carousel" data-carousel="" data-interval="5000">
 <div class="carousel-track"><figure class="carousel-slide is-active"><img alt="Caregiver playing outside with a baby" loading="lazy" src="assets/au-pair-01.jpg"/></figure><figure class="carousel-slide"><img alt="Caregiver playing with a child indoors" loading="lazy" src="assets/au-pair-02.jpg"/></figure><figure class="carousel-slide"><img alt="Au pair spending time with a child" loading="lazy" src="assets/07_au_pair_child.png"/></figure></div>
-<button aria-label="Previous image" class="carousel-control carousel-prev" type="button">‹</button>
-<button aria-label="Next image" class="carousel-control carousel-next" type="button">›</button>
 <div aria-label="Choose image" class="carousel-dots"></div>
 </div></div>
 <div class="feature-copy reveal">
@@ -290,8 +284,6 @@
 </div>
 <div class="jobs-image reveal"><div aria-label="Recent job offer photos" class="media-carousel jobs-carousel" data-carousel="" data-interval="5000">
 <div class="carousel-track"><figure class="carousel-slide is-active"><img alt="Construction and infrastructure professionals" loading="lazy" src="assets/work-01.jpg"/><figcaption class="carousel-caption"><span>Recent opportunity</span><strong>Construction &amp; Infrastructure</strong></figcaption></figure><figure class="carousel-slide"><img alt="Electrical technician at work" loading="lazy" src="assets/work-02.jpg"/><figcaption class="carousel-caption"><span>Recent opportunity</span><strong>Electrical &amp; Technical</strong></figcaption></figure><figure class="carousel-slide"><img alt="Infrastructure worker in a rail tunnel" loading="lazy" src="assets/work-03.jpg"/><figcaption class="carousel-caption"><span>Recent opportunity</span><strong>Infrastructure &amp; Rail</strong></figcaption></figure><figure class="carousel-slide"><img alt="Medical and laboratory professionals" loading="lazy" src="assets/work-04.jpg"/><figcaption class="carousel-caption"><span>Recent opportunity</span><strong>Medical &amp; Laboratory</strong></figcaption></figure><figure class="carousel-slide"><img alt="Healthcare professionals" loading="lazy" src="assets/work-05.jpg"/><figcaption class="carousel-caption"><span>Recent opportunity</span><strong>Healthcare</strong></figcaption></figure></div>
-<button aria-label="Previous image" class="carousel-control carousel-prev" type="button">‹</button>
-<button aria-label="Next image" class="carousel-control carousel-next" type="button">›</button>
 <div aria-label="Choose image" class="carousel-dots"></div>
 </div></div>
 </div>
@@ -306,8 +298,6 @@
 </div>
 <div class="visa-image"><div aria-label="Visa and travel support photos" class="media-carousel visa-carousel" data-carousel="" data-interval="5000">
 <div class="carousel-track"><figure class="carousel-slide is-active"><img alt="Passenger airplane in flight" loading="lazy" src="assets/visa-01.jpg"/></figure><figure class="carousel-slide"><img alt="Open passport showing travel stamps" loading="lazy" src="assets/visa-02.jpg"/></figure><figure class="carousel-slide"><img alt="Passport and boarding passes with an airplane in the background" loading="lazy" src="assets/09_passport_airport.png"/></figure></div>
-<button aria-label="Previous image" class="carousel-control carousel-prev" type="button">‹</button>
-<button aria-label="Next image" class="carousel-control carousel-next" type="button">›</button>
 <div aria-label="Choose image" class="carousel-dots"></div>
 </div></div>
 </div>
@@ -339,6 +329,11 @@
 <option>Visa and Travel Support</option>
 </select>
 </div>
+<div class="form-field">
+<label for="email">Email address</label>
+<input autocomplete="email" id="email" name="email" required="" type="email" inputmode="email" placeholder="you@example.com"/>
+<p class="field-prompt">We’ll send a verification link here. Your enquiry is only delivered after you confirm your email.</p>
+</div>
 <div class="form-row">
 <div class="form-field">
 <label for="country">Country of origin</label>
@@ -353,12 +348,16 @@
 <label for="message">Short message</label><p class="field-prompt" id="message-prompt">Tell us a little about what you are looking for.</p>
 <textarea id="message" name="message" placeholder="Tell us a little about what you are looking for." required="" rows="6"></textarea>
 </div>
+<div aria-hidden="true" class="hp-field">
+<label for="website">Website</label>
+<input autocomplete="off" id="website" name="website" tabindex="-1" type="text"/>
+</div>
 <label class="checkbox-field">
-<input id="consent" required="" type="checkbox"/>
-<span>I agree to be contacted about my enquiry.</span>
+<input id="consent" name="consent" required="" type="checkbox"/>
+<span>I agree to be contacted about my enquiry and understand that I must verify my email before the enquiry is sent.</span>
 </label>
-<button class="button button-primary button-full" type="submit">Send Message <span aria-hidden="true">→</span></button>
-<p aria-live="polite" class="form-status" id="form-status"></p>
+<button class="button button-primary button-full" id="submit-enquiry" type="submit">Send verification link <span aria-hidden="true">→</span></button>
+<div aria-live="polite" class="form-status" id="form-status" role="status"></div>
 </form>
 </div>
 </section>
@@ -376,6 +375,7 @@
 <p>© <span id="year"></span> Tera Kairos. All rights reserved.</p>
 </div>
 </footer>
+<script src="config.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
