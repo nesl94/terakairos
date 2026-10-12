@@ -1281,3 +1281,9 @@ button { color: inherit; }
   pointer-events: none !important;
 }
 
+
+
+/* Final honeypot fix: keep anti-spam field in the HTML but never show it */
+.hp-field {
+  display: none !important;
+}
