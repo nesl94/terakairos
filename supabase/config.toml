@@ -1,0 +1,5 @@
+[functions.submit-enquiry]
+verify_jwt = false
+
+[functions.verify-enquiry]
+verify_jwt = false

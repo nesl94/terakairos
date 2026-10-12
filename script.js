@@ -333,29 +333,77 @@ document.querySelectorAll('[data-service]').forEach(el => {
 
 const form = document.getElementById('inquiry-form');
 const status = document.getElementById('form-status');
-form?.addEventListener('submit', event => {
+const submitButton = document.getElementById('submit-enquiry');
+
+function setFormStatus(message, type = '') {
+  if (!status) return;
+  status.className = `form-status${type ? ` is-${type}` : ''}`;
+  status.textContent = message;
+}
+
+form?.addEventListener('submit', async event => {
   event.preventDefault();
+
   if (!form.checkValidity()) {
-    status.textContent = 'Please complete the required fields before sending.';
+    setFormStatus('Please complete the required fields before sending.', 'error');
     form.reportValidity();
     return;
   }
 
-  const recipient = form.dataset.recipient || 'tera.kairos@yahoo.com';
-  const data = new FormData(form);
-  const service = data.get('service') || 'General enquiry';
-  const subject = `Tera Kairos enquiry — ${service}`;
-  const body = [
-    `Service: ${service}`,
-    `Country of origin: ${data.get('country') || ''}`,
-    `Date of birth: ${data.get('dob') || ''}`,
-    '',
-    'Message:',
-    data.get('message') || ''
-  ].join('\n');
+  const endpoint = window.TERA_KAIROS_FORM_CONFIG?.submitEndpoint?.trim();
+  if (!endpoint) {
+    setFormStatus('Email verification is not connected yet. Please contact tera.kairos@yahoo.com while the secure form is being configured.', 'error');
+    return;
+  }
 
-  status.textContent = `Opening your email app to send this enquiry to ${recipient}.`;
-  window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const data = new FormData(form);
+  const payload = {
+    service: String(data.get('service') || '').trim(),
+    email: String(data.get('email') || '').trim(),
+    country: String(data.get('country') || '').trim(),
+    dob: String(data.get('dob') || '').trim(),
+    message: String(data.get('message') || '').trim(),
+    website: String(data.get('website') || '').trim()
+  };
+
+  const originalLabel = submitButton?.innerHTML;
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.innerHTML = 'Sending verification link…';
+  }
+  setFormStatus('Preparing your verification email…');
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    let result = {};
+    try { result = await response.json(); } catch (_) {}
+
+    if (!response.ok) {
+      const message = result?.message || 'We could not send the verification email. Please try again shortly.';
+      throw new Error(message);
+    }
+
+    const masked = result?.maskedEmail || 'your email address';
+    setFormStatus(`Almost there! We sent a verification link to ${masked}. Please click it within 60 minutes. Your enquiry will only be delivered to Tera Kairos after you verify the address.`, 'success');
+
+    // Prevent accidental duplicate submissions while the first enquiry is waiting for verification.
+    [...form.elements].forEach(element => {
+      if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement || element instanceof HTMLSelectElement || element instanceof HTMLButtonElement) {
+        element.disabled = true;
+      }
+    });
+  } catch (error) {
+    setFormStatus(error?.message || 'Something went wrong. Please try again.', 'error');
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.innerHTML = originalLabel || 'Send verification link <span aria-hidden="true">→</span>';
+    }
+  }
 });
 
 
