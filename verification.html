@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#082f66"/>
+  <title>Email verification | Tera Kairos</title>
+  <link rel="icon" href="assets/tera-kairos-logo.jpeg" type="image/jpeg"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    body { min-height: 100vh; display: grid; place-items: center; padding: 28px; background: linear-gradient(145deg,#eef8ff,#fff6ee); }
+    .verify-shell { width: min(680px,100%); padding: 44px; border: 1px solid var(--line); border-radius: 32px; background:#fff; box-shadow:var(--shadow-soft); text-align:center; }
+    .verify-shell img { width: 110px; height: auto; border-radius: 18px; margin-bottom: 20px; }
+    .verify-shell h1 { margin: 0 0 12px; font-size: clamp(2rem,5vw,3.4rem); color: var(--navy); }
+    .verify-shell p { margin: 0 auto 24px; max-width: 560px; color: var(--muted); font-size: 1.05rem; line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <main class="verify-shell">
+    <img src="assets/tera-kairos-logo.jpeg" alt="Tera Kairos logo"/>
+    <h1 id="verify-title">Checking your enquiry…</h1>
+    <p id="verify-copy">Please wait a moment.</p>
+    <a class="button button-primary" href="index.html">Back to Tera Kairos</a>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const state = params.get('status') || 'error';
+    const title = document.getElementById('verify-title');
+    const copy = document.getElementById('verify-copy');
+    const content = {
+      success: ['Thank you — email verified!', 'Your enquiry has now been sent to Tera Kairos. We’ll get in touch using the email address you verified.'],
+      expired: ['This verification link has expired.', 'For your security, verification links expire after 60 minutes. Please return to the website and submit the enquiry again.'],
+      invalid: ['This verification link is not valid.', 'It may already have been used, or the link may be incomplete. Please submit a new enquiry if needed.'],
+      error: ['We could not complete the verification.', 'Please try the link again. If the problem continues, contact tera.kairos@yahoo.com.']
+    };
+    const [heading, message] = content[state] || content.error;
+    title.textContent = heading;
+    copy.textContent = message;
+  </script>
+</body>
+</html>
